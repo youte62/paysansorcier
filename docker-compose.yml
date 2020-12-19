@@ -1,0 +1,21 @@
+wordpress:
+    image: wordpress:5.6.0-php7.4-apache
+    container_name: wordpress
+    links:
+     - db:mysql
+    environment:
+      - WORDPRESS_DB_PASSWORD="${PASSWORD}"
+    ports:
+     - "8000:80"
+    volumes:
+     - ./html:/var/www/html
+db:
+    image: mysql:5.7
+    container_name: mysqlc
+    ports:
+     - 3306
+    environment:
+     - MYSQL_ROOT_PASSWORD="${PASSWORD}"
+     - MYSQL_DATABASE=paysansorcier
+    volumes:
+     - ./database:/var/lib/mysql
